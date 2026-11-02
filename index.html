@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="img/favicon-512.png">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<title>Botellon — Spanish Tapas & Wine Bar, Graceville</title>
+<meta name="description" content="Spanish tapas, paella and wine on Honour Ave, Graceville. Book a table online.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* Brand: green #415729 · rust #ac441e · cream #dcc7b7 */
+    --green:#415729; --green-2:#55703a; --green-soft:#ece2d8; --green-dark:#2e3f1c;
+    --rust:#ac441e; --brand-cream:#dcc7b7;
+    --cream:#f5eee7; --paper:#fbf8f4; --ink:#22251d; --muted:#6c6a61;
+    --terracotta:#ac441e; --line:#e4d7cb;
+    --serif:'Josefin Sans', 'Jost', system-ui, sans-serif;
+    --sans:'Jost', system-ui, -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);background:var(--cream);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+  a{color:inherit}
+  img{max-width:100%;display:block}
+
+  /* Header */
+  header.top{position:sticky;top:0;z-index:20;background:rgba(247,242,233,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .top-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;gap:16px}
+  .logo{font-family:var(--serif);font-size:26px;font-weight:600;letter-spacing:.18em;color:var(--green);text-decoration:none}
+  nav.links{display:flex;gap:22px;font-size:14px;letter-spacing:.06em;text-transform:uppercase}
+  nav.links a{text-decoration:none;color:var(--ink);opacity:.8}
+  nav.links a:hover{opacity:1;color:var(--green)}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--green);color:#fff;text-decoration:none;font-weight:500;font-size:15px;letter-spacing:.04em;padding:12px 22px;border-radius:999px;border:0;cursor:pointer;transition:background .2s}
+  .btn:hover{background:var(--green-2)}
+  .btn.ghost{background:transparent;color:var(--green);border:1.5px solid var(--green)}
+  .btn.ghost:hover{background:var(--green);color:#fff}
+  .top .btn{padding:10px 18px;font-size:14px}
+  @media (max-width:760px){ nav.links{display:none} }
+
+  /* Hero */
+  .hero{position:relative;min-height:78vh;display:flex;align-items:center;color:var(--brand-cream);overflow:hidden;background:var(--green)}
+  .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+  .hero-art{width:100%;max-width:460px;justify-self:center;opacity:.95}
+  @media (max-width:760px){ .hero-grid{grid-template-columns:1fr} .hero-art{max-width:260px;order:-1;margin-top:28px} }
+  .hero .tiles{position:absolute;inset:0;opacity:.18;background-image:
+      linear-gradient(90deg, rgba(255,255,255,.35) 1px, transparent 1px),
+      linear-gradient(rgba(255,255,255,.35) 1px, transparent 1px);
+    background-size:46px 46px}
+  .hero .photo-note{position:absolute;top:18px;right:18px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;background:rgba(0,0,0,.25);padding:6px 10px;border-radius:6px}
+  .hero-inner{position:relative;max-width:1120px;margin:0 auto;padding:56px 20px 64px;width:100%}
+  .eyebrow{font-size:13px;letter-spacing:.22em;text-transform:uppercase;opacity:.85;margin-bottom:14px}
+  .hero h1{font-family:var(--serif);font-weight:500;font-size:clamp(40px,6.5vw,78px);line-height:1.02;margin-bottom:18px}
+  .hero h1{text-transform:uppercase;letter-spacing:.02em}
+  .hero h1 em{font-style:normal;color:#e8a27f}
+  .hero p.lead{max-width:540px;font-size:18px;opacity:.92;margin-bottom:28px}
+  .hero .actions{display:flex;gap:12px;flex-wrap:wrap}
+  .hero .btn{background:var(--brand-cream);color:var(--green)}
+  .hero .btn:hover{background:#fff}
+  .hero .btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+  .hero .btn.ghost:hover{background:#fff;color:var(--green)}
+
+  /* Info strip */
+  .strip{background:var(--paper);border-bottom:1px solid var(--line)}
+  .strip-inner{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+  .strip .cell{padding:22px 20px;border-right:1px solid var(--line)}
+  .strip .cell:last-child{border-right:0}
+  .strip .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+  .strip .v{font-family:var(--serif);font-size:21px;line-height:1.2;color:var(--green)}
+  .strip .s{font-size:13px;color:var(--muted);margin-top:4px}
+  @media (max-width:860px){ .strip-inner{grid-template-columns:1fr 1fr} .strip .cell:nth-child(2){border-right:0} .strip .cell:nth-child(-n+2){border-bottom:1px solid var(--line)} }
+
+  /* Sections */
+  section.block{max-width:1120px;margin:0 auto;padding:72px 20px}
+  .sec-head{text-align:center;margin-bottom:34px}
+  .sec-head h2{font-family:var(--serif);font-weight:500;text-transform:uppercase;letter-spacing:.04em;font-size:clamp(36px,5vw,54px);color:var(--green);line-height:1.05}
+  .sec-head p{color:var(--muted);margin-top:10px;max-width:560px;margin-left:auto;margin-right:auto}
+
+  /* Menu tabs */
+  .tabs{position:sticky;top:61px;z-index:10;background:var(--cream);display:flex;gap:8px;overflow-x:auto;padding:12px 2px;margin:0 -2px 18px;scrollbar-width:none;justify-content:center}
+  .tabs::-webkit-scrollbar{display:none}
+  @media (max-width:760px){ .tabs{justify-content:flex-start} }
+  .tab{flex:0 0 auto;font-family:var(--sans);font-size:14px;letter-spacing:.05em;padding:9px 16px;border-radius:999px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+  .tab[aria-selected="true"]{background:var(--green);border-color:var(--green);color:#fff}
+  .panel{display:none}
+  .panel.active{display:block}
+  .group{margin-bottom:46px}
+  .group h3{font-family:var(--serif);font-weight:500;font-size:28px;text-transform:uppercase;letter-spacing:.04em;color:var(--ink);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .group h3 small{font-family:var(--sans);font-size:13px;color:var(--muted);letter-spacing:.04em}
+  .group .rule{height:1px;background:var(--line);margin:10px 0 22px}
+  .group .note{font-size:14px;color:var(--terracotta);margin:-10px 0 20px}
+
+  /* Dish cards */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:22px}
+  .card{background:var(--paper);border-radius:16px;overflow:hidden;border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .2s, box-shadow .2s}
+  .card:hover{transform:translateY(-2px);box-shadow:0 10px 30px -18px rgba(31,74,58,.45)}
+  .carousel{position:relative;aspect-ratio:4/3;background:var(--green-soft)}
+  .slides{display:flex;height:100%;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .slides::-webkit-scrollbar{display:none}
+  .slide{flex:0 0 100%;scroll-snap-align:center;display:flex;align-items:center;justify-content:center;position:relative}
+  .slide img{width:100%;height:100%;object-fit:cover}
+  .ph{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--green);
+    background-image:linear-gradient(90deg, rgba(31,74,58,.07) 1px, transparent 1px),linear-gradient(rgba(31,74,58,.07) 1px, transparent 1px);background-size:22px 22px}
+  .ph .ini{font-family:var(--serif);font-size:44px;font-style:italic;opacity:.55;line-height:1}
+  .ph .lbl{font-size:11px;letter-spacing:.16em;text-transform:uppercase;opacity:.55}
+  .dots{position:absolute;bottom:10px;left:0;right:0;display:flex;justify-content:center;gap:6px}
+  .dot{width:7px;height:7px;border-radius:50%;background:rgba(31,74,58,.25);border:0;padding:0;cursor:pointer}
+  .dot.on{background:var(--green)}
+  .arrow{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:0;background:rgba(255,253,248,.9);color:var(--green);font-size:18px;cursor:pointer;opacity:0;transition:opacity .2s;display:flex;align-items:center;justify-content:center}
+  .arrow.l{left:8px}.arrow.r{right:8px}
+  .card:hover .arrow{opacity:1}
+  @media (hover:none){ .arrow{display:none} }
+  .card .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .card .row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .card .name{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:.01em;line-height:1.15}
+  .card .price{font-weight:600;color:var(--green);white-space:nowrap;font-size:16px}
+  .card .desc{font-size:14.5px;color:var(--muted)}
+  .tag{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--terracotta);font-weight:600}
+
+  /* Compact list (wine / spirits) */
+  .list{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:6px 20px}
+  .li{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px dashed var(--line)}
+  .li:last-child{border-bottom:0}
+  .li .n{font-size:15.5px}
+  .li .n span{display:block;font-size:13px;color:var(--muted)}
+  .li .p{font-weight:600;color:var(--green);white-space:nowrap}
+  .list-head{display:flex;justify-content:flex-end;font-size:12px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;padding:10px 0 0}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  @media (max-width:760px){ .two{grid-template-columns:1fr} }
+
+  /* Feature cards (banquets, specials) */
+  .features{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px}
+  .feature{background:var(--green);color:#fff;border-radius:18px;padding:28px}
+  .feature.light{background:var(--paper);color:var(--ink);border:1px solid var(--line)}
+  .feature h4{font-family:var(--serif);font-weight:500;font-size:32px;line-height:1.1}
+  .feature .big{font-family:var(--serif);font-size:44px;line-height:1;margin:12px 0 4px}
+  .feature .sub{font-size:14px;opacity:.8;margin-bottom:16px}
+  .feature ul{list-style:none;font-size:15px}
+  .feature li{padding:7px 0;border-top:1px solid rgba(255,255,255,.18)}
+  .feature.light li{border-top-color:var(--line)}
+  .feature li b{font-weight:600}
+
+  /* Visit */
+  .visit{background:var(--green);color:#fff}
+  .visit .block{padding-top:72px;padding-bottom:72px}
+  .visit .sec-head h2{color:#fff}
+  .visit .sec-head p{color:rgba(255,255,255,.75)}
+  .visit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  @media (max-width:860px){ .visit-grid{grid-template-columns:1fr} }
+  .vcard{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:16px;padding:24px}
+  .vcard h4{font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.7;margin-bottom:12px;font-weight:500}
+  .hours{width:100%;border-collapse:collapse;font-size:15px}
+  .hours td{padding:6px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+  .hours td:last-child{text-align:right}
+  .vcard p{font-size:15px;margin-bottom:8px;opacity:.92}
+  .vcard .small{font-size:13px;opacity:.7}
+  .visit .btn{background:#fff;color:var(--green);margin-top:10px}
+  .visit .btn:hover{background:#dcc7b7}
+
+  footer{background:var(--green-dark);color:rgba(255,255,255,.7);font-size:13px}
+  footer .inner{max-width:1120px;margin:0 auto;padding:26px 20px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer .logo{color:#fff;font-size:20px}
+
+  /* Mobile sticky book bar */
+  .mbar{display:none}
+  @media (max-width:760px){
+    .mbar{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:30;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(247,242,233,.97);border-top:1px solid var(--line)}
+    .mbar .btn{flex:1}
+    body{padding-bottom:72px}
+  }
+
+  .h2l{font-family:var(--serif);font-weight:500;text-transform:uppercase;letter-spacing:.03em;font-size:clamp(32px,4.5vw,46px);color:var(--green);line-height:1.08;margin:6px 0 12px}
+  .enquiry{display:grid;grid-template-columns:1fr 1.3fr;gap:32px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:30px}
+  @media (max-width:760px){ .enquiry{grid-template-columns:1fr;padding:22px} }
+  .enq-title{font-family:var(--serif);font-weight:500;font-size:32px;color:var(--green)}
+  .enq-sub{color:var(--muted);margin-top:8px}
+  form label{display:block;font-size:13px;color:var(--muted);margin-bottom:12px}
+  form input,form textarea,form select{display:block;width:100%;margin-top:5px;font:inherit;font-size:15px;color:var(--ink);padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff}
+  form input:focus,form textarea:focus,form select:focus{outline:none;border-color:var(--green)}
+  .f2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .formnote{font-size:14px;color:var(--green);margin-top:10px}
+  .vouch{background:var(--green-soft)}
+  .vouch-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-top:56px;padding-bottom:56px}
+  .vouch-inner p{color:var(--muted);max-width:520px}
+  .story{display:grid;grid-template-columns:1fr 1.2fr;gap:40px;align-items:center}
+  @media (max-width:760px){ .story{grid-template-columns:1fr} }
+  .story p{margin-bottom:12px;color:#3c403a}
+  .story-ph{aspect-ratio:4/5;border-radius:18px;background:var(--green-soft);display:flex;align-items:center;justify-content:center;color:var(--green);font-size:12px;letter-spacing:.14em;text-transform:uppercase;opacity:.8;
+    background-image:linear-gradient(90deg, rgba(31,74,58,.07) 1px, transparent 1px),linear-gradient(rgba(31,74,58,.07) 1px, transparent 1px);background-size:22px 22px}
+  .press{font-size:14px;color:var(--muted)!important;border-top:1px solid var(--line);padding-top:14px;margin-top:18px}
+  .reviews{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .stars{color:#d29a3a;font-size:22px;letter-spacing:4px}
+  .faq{max-width:760px;margin:0 auto}
+  .faq details{background:var(--paper);border:1px solid var(--line);border-radius:12px;margin-bottom:10px;padding:0 18px}
+  .faq summary{cursor:pointer;padding:16px 0;font-weight:500;list-style:none;display:flex;justify-content:space-between}
+  .faq summary::after{content:"+";color:var(--green);font-size:20px;line-height:1}
+  .faq details[open] summary::after{content:"–"}
+  .faq details p{padding:0 0 16px;color:var(--muted)}
+  .news{background:var(--green);color:#fff}
+  .news-form{display:flex;gap:10px;max-width:440px;margin:0 auto}
+  .news-form input{flex:1;font:inherit;padding:12px 16px;border-radius:999px;border:0}
+  .news .btn{background:var(--brand-cream);color:var(--green)}
+  .fgrid{display:grid!important;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:28px;padding-top:44px!important;padding-bottom:44px!important}
+  @media (max-width:760px){ .fgrid{grid-template-columns:1fr 1fr} }
+  footer h5{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#fff;margin-bottom:10px;font-weight:500}
+  footer a,footer span{display:block;text-decoration:none;margin-bottom:6px;line-height:1.45}
+  footer a:hover{color:#fff}
+  .card .es{font-size:13px;color:var(--muted);font-style:italic;margin-top:-2px}
+  .diets{display:flex;gap:5px;flex-wrap:wrap;margin-top:2px}
+  .diet{font-size:10.5px;font-weight:600;letter-spacing:.06em;padding:2px 7px;border-radius:999px;background:var(--green-soft);color:var(--green)}
+  .dietkey{text-align:center;font-size:13px;color:var(--muted);margin:-6px 0 22px}
+
+  .say{display:grid;grid-template-columns:220px 1fr;gap:40px;align-items:center;max-width:860px!important;padding-bottom:20px!important}
+  @media (max-width:760px){ .say{grid-template-columns:1fr;text-align:center;gap:16px} .say-art{max-width:150px;margin:0 auto} }
+  .say-word{font-family:var(--serif);font-size:clamp(40px,6vw,60px);color:var(--green);text-transform:uppercase;letter-spacing:.04em;line-height:1}
+  .say-pron{margin:10px 0 14px;color:var(--rust);font-size:18px;letter-spacing:.08em}
+  .say-pron span{font-weight:600}
+  .say-pron i{color:var(--muted);font-size:14px;letter-spacing:0;margin-left:8px}
+  .say-def{font-size:17px;color:#3a3d33}
+  .say-tip{font-size:14px;color:var(--muted);margin-top:10px}
+  .vouch-art{width:200px;max-width:40vw}
+  .story-img{width:100%;height:auto;border-radius:18px}
+  .hh-car{margin:-28px -28px 22px;border-radius:18px 18px 0 0;overflow:hidden}
+  .feature:hover .arrow{opacity:1}
+  .feature{display:flex;flex-direction:column;align-items:flex-start}
+  .feature .carousel,.feature ul{align-self:stretch}
+  .wed-art{margin-top:auto;align-self:center;width:70%;max-width:320px;opacity:.9;padding-top:30px}
+  .strip-photos{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:36px}
+  .strip-photos figure{margin:0;position:relative;border-radius:16px;overflow:hidden}
+  .strip-photos img{width:100%;aspect-ratio:4/5;object-fit:cover}
+  .strip-photos figcaption{position:absolute;left:10px;bottom:10px;background:rgba(251,248,244,.92);color:var(--green);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+  @media (max-width:760px){ .strip-photos{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none} .strip-photos figure{flex:0 0 62%;scroll-snap-align:start} }
+  .wine-intro{display:grid;grid-template-columns:260px 1fr;gap:32px;align-items:center;margin-bottom:36px}
+  .wine-intro figure{margin:0;position:relative;border-radius:16px;overflow:hidden}
+  .wine-intro img{width:100%;aspect-ratio:4/5;object-fit:cover}
+  .wine-intro figcaption{position:absolute;left:10px;bottom:10px;background:rgba(251,248,244,.92);color:var(--green);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+  .wine-intro p{font-size:18px;color:#3a3d33;max-width:480px}
+  @media (max-width:760px){ .wine-intro{grid-template-columns:1fr;gap:16px} .wine-intro figure{max-width:300px} }
+  .list-photo{margin:0 0 16px;position:relative;border-radius:16px;overflow:hidden}
+  .list-photo img{width:100%;aspect-ratio:4/3;object-fit:cover}
+  .list-photo figcaption{position:absolute;left:10px;bottom:10px;background:rgba(251,248,244,.92);color:var(--green);font-size:12px;letter-spacing:.06em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+  .meet{background:var(--green-soft)}
+  .meet-inner{max-width:1120px;margin:0 auto;padding:72px 20px;display:grid;grid-template-columns:1fr 1.3fr;gap:44px;align-items:center}
+  @media (max-width:760px){ .meet-inner{grid-template-columns:1fr} }
+  .meet p{margin-bottom:12px;color:#3a3d33}
+  .meet .btn{margin-top:8px}
+  .meet-ph{aspect-ratio:4/5;max-height:520px;border-radius:18px;background:var(--green);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;color:var(--brand-cream);font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+  .meet-ph img{width:70%;opacity:.9}
+  .meet-img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px}
+  .meet-inner{grid-template-columns:1.3fr 1fr}
+  .meet-img{order:2}
+  @media (max-width:760px){ .meet-inner{grid-template-columns:1fr} .meet-img{order:0} }
+  .vouch-inner{max-width:1120px;margin:0 auto;padding-left:20px;padding-right:20px}
+  .reviews > .block,.news > .block{max-width:1120px;margin:0 auto;padding-left:20px;padding-right:20px}
+  .enq-title{text-transform:uppercase;letter-spacing:.04em}
+  .f2[hidden]{display:none}
+  section[hidden]{display:none}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="top-inner">
+    <a class="logo" href="#top"><img src="img/wordmark-green.png" alt="Botellón" style="height:24px;width:auto"></a>
+    <nav class="links">
+      <a href="#menu">Menu</a>
+      <a href="#whats-on">What's On</a>
+      <a href="#functions">Functions</a>
+      <a href="#vouchers">Vouchers</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="btn" id="bookTop" href="#" target="_blank" rel="noopener">Book a table</a>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-inner hero-grid">
+   <div>
+    <div class="eyebrow">Spanish Tapas &amp; Wine Bar · Graceville</div>
+    <h1>Share plates,<br><em>big bottles.</em></h1>
+    <p class="lead">Tapas, paella and Spanish wine on Honour Ave, Graceville. Sit at the green-tiled bar, in a booth, or out on the terrace under the fairy lights.</p>
+    <div class="actions">
+      <a class="btn" id="bookHero" href="#" target="_blank" rel="noopener">Book a table</a>
+      <a class="btn ghost" href="#menu">See the menu</a>
+    </div>
+   </div>
+   <img class="hero-art" src="img/girl-cream.png" alt="">
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-inner">
+    <div class="cell"><div class="k">Open</div><div class="v">Wed – Sun</div><div class="s">From 4pm · lunch Sat &amp; Sun</div></div>
+    <div class="cell"><div class="k">Happy hour</div><div class="v">4 – 5pm daily</div><div class="s">Drink + pintxo from $21</div></div>
+    <div class="cell"><div class="k">Wednesday</div><div class="v">Tapas Night $53</div><div class="s">4 dishes + a house wine or beer</div></div>
+    <div class="cell"><div class="k">Find us</div><div class="v">1/327 Honour Ave</div><div class="s">Opposite Graceville Station</div></div>
+  </div>
+</div>
+
+<section class="block say" id="name">
+  <img class="say-art" src="img/bull-green.png" alt="">
+  <div>
+    <div class="say-word">Botellón</div>
+    <div class="say-pron"><span>boh · teh · YON</span> <i>noun, Spanish</i></div>
+    <p class="say-def">Literally, <b>"big bottle."</b> In Spain, a botellón is when friends gather in the plaza to share a bottle, some food and a good time. That's the spirit we built Botellon on.</p>
+    <p class="say-tip">Tip: the double "ll" sounds like a "y", and the stress lands on the last syllable.</p>
+  </div>
+</section>
+
+<section class="block" id="menu">
+  <div class="sec-head">
+    <h2>The Menu</h2>
+    <p>Made to share. Our menu changes every fortnight, so some dishes may differ on the night.</p>
+  </div>
+
+  <div class="tabs" role="tablist" id="tabs"></div>
+  <p class="dietkey">GF gluten free · V vegetarian · VG vegan · DF dairy free <i>(dietary tags coming soon)</i></p>
+  <div id="panels"></div>
+</section>
+
+<section class="block" id="whats-on" style="padding-top:20px">
+  <div class="sec-head">
+    <h2>What's On</h2>
+    <p>Our regular nights, and the best way to try a bit of everything.</p>
+  </div>
+  <div class="features">
+    <div class="feature">
+      <div class="eyebrow" style="opacity:.75">Every Wednesday</div>
+      <h4>Wednesday Tapas Night</h4>
+      <div class="big">$53 <span style="font-size:20px">p.p.</span></div>
+      <div class="sub">Four dishes plus a glass of house wine or beer.</div>
+      <a class="btn" style="background:#fff;color:var(--green)" data-book href="#" target="_blank" rel="noopener">Book Wednesday</a>
+      <p style="margin-top:18px;font-size:14px;opacity:.85">See this fortnight's dishes below ↓</p>
+      <img class="wed-art" src="img/sun-cream.png" alt="" style="max-width:220px">
+    </div>
+    <div class="feature light">
+      <div class="carousel hh-car"><div class="slides"><div class="slide"><img src="img/hh-1.jpg" alt="Happy hour drinks and pintxos – photo 1" loading="lazy"></div><div class="slide"><img src="img/hh-2.jpg" alt="Happy hour drinks and pintxos – photo 2" loading="lazy"></div><div class="slide"><img src="img/hh-3.jpg" alt="Happy hour drinks and pintxos – photo 3" loading="lazy"></div></div><button class="arrow l" aria-label="Previous photo">‹</button><button class="arrow r" aria-label="Next photo">›</button><div class="dots"><button class="dot on" aria-label="Photo 1"></button><button class="dot" aria-label="Photo 2"></button><button class="dot" aria-label="Photo 3"></button></div></div>
+      <div class="eyebrow" style="color:var(--terracotta);opacity:1">Daily 4 – 5pm</div>
+      <h4>Happy Hour</h4>
+      <div class="sub" style="margin-top:10px">One drink + one pintxo. One drink per person at a time.</div>
+      <ul>
+        <li><b>Cocktail $23</b> · Aperol Spritz, London Lemonade, Margarita, Red Sangria, French Martini</li>
+        <li><b>Mocktail $21</b> · Mint Lemonade</li>
+        <li><b>Wine $19</b> · House sparkling, white, rosé or red</li>
+        <li><b>Beer $13</b> · Estrella pint</li>
+      </ul>
+      <p style="font-size:13px;color:var(--muted);margin-top:12px">Pintxos: serrano ham &amp; tomato · duck pâté &amp; baby fig · chorizo &amp; tomato · brie &amp; quince · anchovy &amp; whipped roe</p>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="wednesday" style="padding-top:0">
+  <div class="group">
+    <h3>Wednesday Tapas Menu<small id="wedDates"></small></h3><div class="rule"></div>
+    <p class="note">4 dishes + a glass of house wine or beer · $53 p.p. · changes every fortnight</p>
+    <div class="grid" id="wedGrid"></div>
+  </div>
+</section>
+
+<section class="block" id="functions" style="padding-top:20px">
+  <div class="sec-head">
+    <h2>Groups &amp; Functions</h2>
+    <p>Birthdays, work dinners, long lunches. Let the kitchen look after you. A banquet is essential for groups of 8 or more.</p>
+  </div>
+  <div class="features">
+    <div class="feature light">
+      <div class="eyebrow" style="color:var(--terracotta);opacity:1">4 or more people</div>
+      <h4>Standard Banquet</h4>
+      <div class="big" style="color:var(--green)">$75 <span style="font-size:20px">p.p.</span></div>
+      <ul>
+        <li>Marinated olives</li>
+        <li>Sourdough, whipped garlic &amp; chive butter</li>
+        <li>Stracciatella, poached pear, aged balsamic, mint</li>
+        <li>Babaganoush, peppers, olive, sumac, aleppo oil</li>
+        <li>Cured meats, pickles</li>
+        <li>Chorizo, smoked yoghurt, paprika oil, chive</li>
+        <li>Patatas bravas, aioli</li>
+        <li>Eggplant chips, queso ibérico, truffle honey</li>
+        <li>Chorizo y Pollo paella</li>
+        <li><b>Dessert</b> · Churros, chocolate sauce</li>
+      </ul>
+    </div>
+    <div class="feature">
+      <div class="eyebrow" style="opacity:.75">6 or more people</div>
+      <h4>Premium Banquet</h4>
+      <div class="big">$98 <span style="font-size:20px">p.p.</span></div>
+      <ul>
+        <li>Freshly shucked oyster (TAS), cucumber mignonette · 1 p.p.</li>
+        <li>Marinated olives</li>
+        <li>Sourdough, whipped garlic &amp; chive butter</li>
+        <li>Stracciatella, poached pear, aged balsamic, mint</li>
+        <li>Babaganoush, peppers, olive, sumac, aleppo oil</li>
+        <li>Cured meats, pickles</li>
+        <li>Chorizo, smoked yoghurt, paprika oil, chive</li>
+        <li>Patatas bravas, aioli</li>
+        <li>Eggplant chips, queso ibérico, truffle honey</li>
+        <li>Garlic prawns (WA), chilli, olive oil, lemon · 1 p.p.</li>
+        <li><b>Paella of choice</b> · Chorizo y Pollo, Mariscos or Verde</li>
+        <li><b>Dessert</b> · Churros, chocolate sauce</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="contact" style="padding-top:0">
+  <div class="enquiry">
+    <div>
+      <h3 class="enq-title">Contact us</h3>
+      <p class="enq-sub">Questions, function enquiries, feedback or just saying hola. Send us a message and we'll get back to you. For groups of 10 or more, please get in touch here rather than booking online.</p>
+    </div>
+    <form id="fnForm" name="contact" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="contact">
+      <div class="f2">
+        <label>Name<input name="name" required></label>
+        <label>Phone (optional)<input name="phone" type="tel"></label>
+      </div>
+      <label>Email<input name="email" type="email" required></label>
+      <label>What's it about?<select name="topic" id="topicSel"><option>General question</option><option>Function or group booking</option><option>Gift vouchers</option><option>Feedback</option><option>Something else</option></select></label>
+      <div class="f2" id="bookingFields" hidden>
+        <label>Date<input name="date" type="date"></label>
+        <label>Guests<input name="guests" type="number" min="1"></label>
+      </div>
+      <label>Message<textarea name="message" rows="4" required></textarea></label>
+      <button class="btn" type="submit">Send message</button>
+      <p class="formnote" id="fnNote" hidden>Thanks! This form will send for real once the site is live.</p>
+    </form>
+  </div>
+</section>
+
+<section class="vouch" id="vouchers">
+  <div class="block vouch-inner">
+    <div>
+      <div class="eyebrow" style="color:var(--terracotta)">Gift vouchers</div>
+      <h2 class="h2l">Give a night at Botellon</h2>
+      <p>Send a digital voucher by email in a couple of minutes, or pick one up in store.</p>
+    </div>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+      <img class="vouch-art" src="img/fish-rust.png" alt="">
+      <a class="btn" href="https://app.gift-it.com.au/buy/botellon" target="_blank" rel="noopener">Buy a voucher</a>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="story">
+  <div class="story">
+    <img class="story-img" src="img/team.jpg" alt="The Botellon team">
+    <div>
+      <div class="eyebrow" style="color:var(--terracotta)">Our story</div>
+      <h2 class="h2l">A little slice of Spain</h2>
+      <p>We wanted a little piece of that Spanish spirit in Graceville. We opened on Honour Ave in May 2019, stripped the brick walls back and built a bar of handmade deep-green tiles.</p>
+      <p>We're a small, local team who believe hospitality is about friendship, family and community. Come say hi, we'd love to meet you.</p>
+      <p class="press">As featured in <b>Broadsheet</b> · <b>The Weekend Edition</b> · <b>Must Do Brisbane</b></p>
+    </div>
+  </div>
+</section>
+
+<section class="meet" id="maddison">
+  <div class="block meet-inner">
+    <img class="meet-img" src="img/maddison.jpg" alt="Maddison Walker at the Botellon bar">
+    <div>
+      <div class="eyebrow" style="color:var(--rust)">Meet the owner</div>
+      <h2 class="h2l">Hola, I'm Maddison</h2>
+      <p>I started out waitressing at a local café while I was at university, then went to help Mum at Hunter &amp; Scout next door shortly after graduating. Safe to say I fell in love with hospitality. So instead of pursuing my Bachelor of Nursing, in 2019 I opened Botellon.</p>
+      <p>Graceville has always been home. I went to school down the road and know a lot of the local community. Botellon was born out of many conversations about wanting more nightlife in the area, and it's become a local favourite ever since.</p>
+      <p>These days I'm also building Botellon's new little sibling, Enzo's Pasta &amp; Pizza, right here on Honour Ave.</p>
+      <p>I film it all on my weekly vlog: the busy Saturday nights, the menu tastings, the tile choices and the bits that don't go to plan.</p>
+      <a class="btn" href="https://www.youtube.com/@MaddisonJWalker" target="_blank" rel="noopener">Watch the vlog ↗</a>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <div class="block" style="padding-top:56px;padding-bottom:56px;text-align:center">
+    <img src="img/gracias-green.png" alt="Gracias!" style="height:22px;width:auto;margin:0 auto 10px"><div class="stars">★★★★★</div>
+    <h2 class="h2l" style="margin:8px 0 10px">Loved by locals</h2>
+    <p style="color:var(--muted);margin-bottom:20px">See what our guests say, or leave us a review after your visit.</p>
+    <a class="btn ghost" href="https://www.google.com/maps/search/?api=1&query=Botellon+Spanish+Tapas+%26+Wine+Bar+327+Honour+Ave+Graceville" target="_blank" rel="noopener">Read our Google reviews</a>
+  </div>
+</section>
+
+<section class="block" id="faq">
+  <div class="sec-head"><h2>Good to know</h2></div>
+  <div class="faq">
+    <details><summary>Do I need to book?</summary><p>We recommend it, especially Friday to Sunday. Walk-ins are welcome when there's room.</p></details>
+    <details><summary>Can you cater for dietaries?</summary><p>Yes. Each dish on our menu is marked with its dietary info, and the team can help on the night. Please note any allergies on your booking.</p></details>
+    <details><summary>Are dogs welcome?</summary><p>Yes, we're dog friendly! Please note your dog on your booking. Dogs need to stay on the ground.</p></details>
+    <details><summary>Are kids welcome?</summary><p>Of course! We don't have a children's menu, but there's plenty on ours to share. For large bookings, kids need to be included in the banquet, and two children under 10 count as one adult. Let us know on your booking if you'll need a high chair.</p></details>
+    <details><summary>Where do I park?</summary><p>There's street parking on Honour Ave and Richmond St, and Graceville Station is right across the road.</p></details>
+    <details><summary>Is it wheelchair accessible?</summary><p>Yes. Let us know on your booking and we'll set you up with the best table.</p></details>
+    <details><summary>Do you do takeaway?</summary><p>Yes, for pickup. Call us on 0428 121 003 to place your order.</p></details>
+    <details><summary>Are there surcharges?</summary><p>10% on Sundays and 15% on public holidays.</p></details>
+    <details><summary>Why do you close at 9.45pm?</summary><p>We have neighbours close by, so we close at 9.45pm sharp. The kitchen closes at 8.30pm and last drinks are at 9.20pm.</p></details>
+  </div>
+</section>
+
+<div class="visit" id="visit">
+  <section class="block">
+    <div class="sec-head">
+      <h2>Come dine with us</h2>
+      <p>Bookings recommended. Walk-ins welcome when there's room.</p>
+    </div>
+    <div class="visit-grid">
+      <div class="vcard">
+        <h4>Hours</h4>
+        <table class="hours">
+          <tr><td>Mon – Tue</td><td>Closed</td></tr>
+          <tr><td>Wed – Fri</td><td>4pm – 9.30pm</td></tr>
+          <tr><td>Sat – Sun</td><td>12pm – 9.45pm</td></tr>
+        </table>
+        <p class="small" style="margin-top:12px">Kitchen closes 8.30pm, and between 3–4pm on weekends. On Sundays the kitchen may close earlier, so call ahead if you're coming after 7pm.</p>
+      </div>
+      <div class="vcard">
+        <h4>Find us</h4>
+        <p>1/327 Honour Ave<br>Graceville QLD 4075</p>
+        <p class="small">Across the road from Graceville Station. Street parking on Honour Ave and Richmond St.</p>
+        <p style="margin-top:12px">Phone: 0428 121 003</p>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Botellon+327+Honour+Ave+Graceville" target="_blank" rel="noopener">Get directions</a>
+      </div>
+      <div class="vcard">
+        <h4>Good to know</h4>
+        <p>🐶 Dog friendly. Note your pup on your booking, and dogs stay on the ground.</p>
+        <p>Groups of 10+: <a href="#contact">get in touch</a>.</p>
+        <p>Takeaway: call 0428 121 003 to order for pickup.</p>
+        <p class="small">10% surcharge on Sundays, 15% on public holidays. Sparkling water is complimentary. We close at 9.45pm sharp out of respect for our neighbours.</p>
+        <a class="btn" data-book href="#" target="_blank" rel="noopener">Book a table</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="news">
+  <div class="block" style="padding-top:56px;padding-bottom:56px;text-align:center">
+    <h2 class="h2l" style="color:#fff">Stay in the loop</h2>
+    <p style="opacity:.8;margin:8px 0 20px">New menus, wine nights and the odd invite. No spam.</p>
+    <a class="btn" href="https://eepurl.com/g88l2T" target="_blank" rel="noopener">Join the mailing list ↗</a>
+  </div>
+</section>
+
+<footer>
+  <div class="inner fgrid">
+    <div>
+      <img src="img/wordmark-cream.png" alt="Botellón" style="height:22px;width:auto">
+      <p style="margin-top:10px">Spanish Tapas &amp; Wine Bar<br>1/327 Honour Ave, Graceville QLD 4075<br>0428 121 003</p>
+    </div>
+    <div>
+      <h5>Follow</h5>
+      <a href="https://www.instagram.com/botellon.bne/" target="_blank" rel="noopener">Instagram @botellon.bne</a>
+      <a href="https://www.youtube.com/@MaddisonJWalker" target="_blank" rel="noopener">Behind the scenes: Maddison's vlog ↗</a>
+      <a href="#" id="bookFoot" target="_blank" rel="noopener">Book a table</a>
+      <a href="https://app.gift-it.com.au/buy/botellon" target="_blank" rel="noopener">Gift vouchers</a>
+    </div>
+    <div>
+      <h5>Our family</h5>
+      <a href="https://hunterandscout.com.au" target="_blank" rel="noopener">Hunter &amp; Scout · café next door ↗</a>
+      <span>Enzo's Pasta &amp; Pizza · coming soon</span>
+    </div>
+    <div>
+      <h5>Work with us</h5>
+      <span>We're always keen to meet great hospo people. Drop in with your CV or give us a call.</span>
+    </div>
+  </div>
+</footer>
+
+<div class="mbar">
+  <a class="btn ghost" href="#menu">Menu</a>
+  <a class="btn" data-book href="#" target="_blank" rel="noopener">Book a table</a>
+</div>
+
+<script>
+const BOOK = "https://bookings.nowbookit.com/?accountid=f32cbba6-8374-4b99-8ff5-5fff6ad88680&venueid=4791&theme=light&colors=hex%2Ce51c23";
+document.querySelectorAll('#bookTop,#bookHero,#bookFoot,[data-book]').forEach(a => a.href = BOOK);
+
+/* ---------- MENU DATA ----------
+   Add photos later: give any dish  photos: ["file1.jpg","file2.jpg","file3.jpg"]
+   Dishes with no photos show a placeholder carousel.
+   Dietaries: give any dish  diet:["GF","V"]   ·   Spanish name: es:"..." */
+const MENU = [
+  { id:"food", label:"Food", groups:[
+    { title:"Frío", sub:"Cold · made in house", style:"cards", items:[
+      {es:"Ostras", n:"Freshly shucked oysters (TAS)", d:"Cucumber mignonette. Half or full dozen.", p:"33 / 65", photos:["img/oyster-1.jpg","img/oyster-2.jpg"]},
+      {es:"Pan de masa madre", n:"Sourdough", d:"Whipped garlic & chive butter.", p:"7 p.p."},
+      {es:"Aceitunas aliñadas", n:"Marinated olives", d:"", p:"11", photos:["img/olives-1.jpg"]},
+      {es:"Paté de pato", n:"Duck liver pâté", d:"Fig, walnut, charred bread.", p:"26", photos:["img/pate-1.jpg"]},
+      {es:"Tomates con anchoas", n:"Heirloom tomatoes", d:"Olasagasti anchovies, chilli oil.", p:"27", photos:["img/tomato-1.jpg","img/tomato-2.jpg","img/tomato-3.jpg"]},
+      {n:"Stracciatella", d:"Poached pear, aged balsamic, mint, flatbread.", p:"24", photos:["img/stracc-1.jpg","img/stracc-2.jpg","img/stracc-3.jpg"]},
+      {n:"Babaganoush", d:"Peppers, olive, sumac, aleppo oil, flatbread.", p:"24", photos:["img/baba-1.jpg","img/baba-2.jpg"]},
+    ]},
+    { title:"Bocados", sub:"Small bites", style:"cards", items:[
+      {es:"Croquetas de jamón", n:"Crispy jamón croquettes", d:"Manchego, chipotle mayo. 2 pieces.", p:"18", photos:["img/croq-1.jpg","img/croq-2.jpg"]},
+      {es:"Tosta de anchoas", n:"Anchovy toast", d:"Whipped roe, chives. 2 pieces.", p:"18"},
+      {es:"Vieiras a la plancha", n:"Grilled scallop (WA)", d:"Sobrasada butter. 3 pieces.", p:"29", photos:["img/scallop-2.jpg","img/scallop-3.jpg"]},
+    ]},
+    { title:"Embutidos y quesos", sub:"Meats & cheeses · sliced to order", note:"Choose 2 for $31 · Choose 3 for $37", style:"cards", items:[
+      {es:"Manchego curado", n:"12 month manchego", d:"", p:"24"},
+      {n:"Triple cream brie", d:"", p:"20"},
+      {es:"Jamón serrano", n:"Serrano ham", d:"", p:"22", photos:["img/serrano-1.jpg"]},
+      {n:"Salame", d:"", p:"22"},
+    ]},
+    { title:"Tapas de la casa", sub:"Our classics · made to order", style:"cards", items:[
+      {es:"Chipirones fritos", n:"Baby calamari", d:"Lightly battered, aioli.", p:"22", photos:["img/calamari-1.jpg"]},
+      {n:"Patatas bravas", d:"Aioli.", p:"18", tag:"Classic", photos:["img/bravas-1.jpg"]},
+      {es:"Gambas al ajillo", n:"Garlic prawns (WA)", d:"Chilli, olive oil, lemon.", p:"31"},
+      {es:"Berenjenas fritas", n:"Eggplant chips", d:"Queso ibérico, truffle honey.", p:"21"},
+      {es:"Col a la brasa", n:"Charred cabbage", d:"Almond purée, caper butter, migas.", p:"25"},
+      {n:"Chorizo", d:"Smoked yoghurt, paprika oil, chive.", p:"22", photos:["img/chorizo-1.jpg","img/chorizo-2.jpg","img/chorizo-3.jpg"]},
+      {n:"Baked saganaki cheese", d:"Salsa agridulce, oregano.", p:"33", photos:["img/saganaki-1.jpg"]},
+    ]},
+    { title:"Paella", sub:"Housemade stock & sofrito", note:"Please allow 30–45 minutes", style:"cards", items:[
+      {n:"Chorizo y Pollo", d:"Chorizo, chicken, chimichurri.", p:"65"},
+      {n:"Mariscos (WA)", d:"Prawn, scallop, octopus, chorizo, chipotle aioli.", p:"78", photos:["img/mariscos-1.jpg"]},
+      {n:"Verde", d:"Mushroom, artichoke, zucchini.", p:"56", tag:"Vegetarian"},
+    ]},
+    { title:"A la brasa", sub:"From the grill · over open flame", style:"cards", items:[
+      {es:"Pulpo a la brasa", n:"Octopus (WA)", d:"Potato, pimentón, whipped bottarga.", p:"38", photos:["img/octopus-1.jpg"]},
+      {es:"Picantón asado", n:"Spatchcock", d:"Mojo rojo, lemon oil, sage.", p:"50", photos:["img/spatchcock-1.jpg","img/spatchcock-2.jpg"]},
+      {es:"Costillas estofadas", n:"Braised short ribs", d:"Beef jus, paprika oil, spring onion.", p:"48", photos:["img/shortrib-2.jpg","img/shortrib-1.jpg"]},
+      {es:"Lomo bajo", n:"300g Black Onyx SB5 striploin", d:"Tomato salsa. Add chimichurri +5.", p:"65", photos:["img/steak-1.jpg","img/steak-2.jpg","img/steak-3.jpg"]},
+    ]},
+    { title:"Guarniciones", sub:"Sides", style:"cards", items:[
+      {es:"Ensalada mixta", n:"Mixed radicchio & cos salad", d:"Lime dressing, manchego.", p:"20"},
+      {n:"Patatas bravas", d:"Aioli.", p:"18", photos:["img/bravas-1.jpg"]},
+      {es:"Col a la brasa", n:"Charred cabbage", d:"Almond purée, caper butter, migas.", p:"25"},
+    ]},
+  ]},
+  { id:"dessert", label:"Dessert", groups:[
+    { title:"Postres", sub:"Dessert", style:"cards", items:[
+      {es:"Churros con chocolate", n:"Housemade churros", d:"Chocolate sauce.", p:"19", photos:["img/churros-1.jpg"]},
+      {es:"Tarta de queso vasca", n:"Basque cheesecake", d:"Wild berry sorbet.", p:"21"},
+      {es:"Cremoso de chocolate", n:"Dark chocolate cremeux", d:"Almond crumble, berries.", p:"20"},
+      {n:"Affogato", d:"Ice cream with espresso. Add Frangelico, Baileys, amaretto or Kahlúa for $18.", p:"12"},
+      {es:"Tabla de quesos", n:"Cheese plate", d:"Assorted cheese with quince & crackers.", p:"20"},
+    ]},
+    { title:"Dessert drinks", style:"list", photo:["img/frogmore-1.jpg","Frogmore Creek Ruby Pinot Noir"], items:[
+      {n:"Spanish Coffee", d:"Espresso, Licor 43, freshly whipped cream.", p:"13"},
+      {n:"Irish Alexander", d:"Crème de cacao, Baileys, brandy, vanilla.", p:"23"},
+      {n:"Espresso Martini", d:"Vodka, espresso, Kahlúa, vanilla.", p:"23"},
+      {n:"Amaretto Sour", d:"Amaretto, lemon, bitters.", p:"23"},
+      {n:"Pedro Ximénez Sherry", d:"Traditional Spanish dessert wine: raisins, dates & figs.", p:"15"},
+      {n:"Frogmore Creek Ruby Pinot Noir", d:"Tasmanian fortified: toffee, cashew, blackberry. Glass / bottle.", p:"15 / 55"},
+    ]},
+  ]},
+  { id:"cocktails", label:"Cocktails", strip:[["img/drink-margarita.jpg","Margarita"],["img/drink-spritz.jpg","Aperol Spritz"],["img/drink-lemonade.jpg","London Lemonade"],["img/drink-martini.jpg","Dirty Martini"]], groups:[
+    { title:"Cocktails", sub:"Classics available on request", style:"list", items:[
+      {n:"Red Sangria", d:"Red wine, brandy, orange.", p:"24"},
+      {n:"White Sangria", d:"White wine, brandy, apple, ginger.", p:"24"},
+      {n:"Passionfruit Martini", d:"Vodka, passionfruit, elderflower, pineapple.", p:"24"},
+      {n:"La Pearfecta", d:"Pear-infused vodka, elderflower, lychee, lemon.", p:"24"},
+      {n:"London Lemonade", d:"Gin, elderflower, lemon, soda.", p:"24"},
+      {n:"Espresso Rumtini", d:"Espresso, Kraken coffee rum, Kahlúa, Licor 43.", p:"24"},
+      {n:"Pink Peppercorn Gimlet", d:"Gin, pink peppercorn, lime, agave.", p:"24"},
+      {n:"French Martini", d:"Pineapple, vodka, Chambord.", p:"24"},
+      {n:"Margarita", d:"Tequila, lime, Cointreau. Chilli optional.", p:"24"},
+      {n:"Roja Dora", d:"Gin, Chambord, lime, raspberry, pomegranate.", p:"24"},
+      {n:"Pine & Coco Mojito", d:"Rum, pineapple, coconut, lime, mint.", p:"24"},
+      {n:"Pisco Sour", d:"Pisco, lime, bitters.", p:"24"},
+      {n:"Spritz of choice", d:"Aperol, Campari or Chambord with prosecco & soda.", p:"20"},
+      {n:"Limoncello Spritz", d:"Limoncello, prosecco.", p:"15"},
+    ]},
+    { title:"Mocktails", style:"list", items:[
+      {n:"Passionfruit Mocktini", d:"Passionfruit, vanilla, pineapple, cranberry, lime, tonic.", p:"20"},
+      {n:"Mint Lemonade", d:"Mint, orange, pineapple, ginger beer.", p:"20"},
+      {n:"The Hummingbird", d:"Hibiscus, lychee, agave, orange, lemon, soda.", p:"20"},
+      {n:"By The Shore", d:"Watermelon, lychee, cucumber.", p:"20"},
+    ]},
+    { title:"Soft drinks", style:"list", items:[
+      {n:"Bundaberg Ginger Beer · Sprite · Coke · Coke No Sugar", p:"6"},
+      {n:"Lemon, Lime & Bitters · Ginger Ale", p:"6"},
+      {n:"Raspberry Fizz", d:"Sprite & red cordial", p:"6"},
+      {n:"Sparkling water", p:"Complimentary"},
+    ]},
+  ]},
+  { id:"wine", label:"Wine", intro:{img:"img/wine-1.jpg", cap:"Cape Mentelle Chardonnay", text:"Spanish favourites alongside some of our best-loved Australian and European drops, by the glass or the bottle. Not sure what to pick? Ask the team for a pairing."}, groups:[
+    { title:"Sparkling", style:"list", head:"Glass – Bottle", items:[
+      {n:"Charles Heidsieck Champagne", d:"Brut Réserve", p:"168"},
+      {n:"Bianca Vigna, Prosecco", p:"17 – 62"},
+      {n:"Chandon, Brut", p:"17 – 62"},
+      {n:"Lonia, Cava", p:"16 – 59"},
+    ]},
+    { title:"White", style:"list", head:"Glass – Bottle", items:[
+      {n:"Marc Brédif, Vouvray", d:"Chenin Blanc · Loire Valley, France 2024", p:"17 – 65"},
+      {n:"Poblets Del Montsant", d:"White Grenache & Macabeo · Tarragona, Spain 2022", p:"17 – 66"},
+      {n:"Abellio, Albariño", d:"Rías Baixas, Spain 2024", p:"18 – 70"},
+      {n:"Mandrarossa, Fiano", d:"Sicily 2025", p:"15 – 55"},
+      {n:"Shaw + Smith, Sauvignon Blanc", d:"Adelaide Hills 2026", p:"17 – 68"},
+      {n:"Kelvedon Estate, Sauvignon Blanc", d:"East Coast Tasmania 2025", p:"17 – 67"},
+      {n:"J. de Villebois, Pouilly-Fumé", d:"Sauvignon Blanc · Loire Valley, France 2024", p:"18 – 82"},
+      {n:"Mesh, Riesling", d:"Eden Valley 2025", p:"16 – 56"},
+      {n:"La Pierrelée, Chablis", d:"Burgundy, France 2023", p:"18 – 82"},
+      {n:"Kelvedon Estate, Chardonnay", d:"East Coast Tasmania 2024", p:"17 – 70"},
+      {n:"Cape Mentelle, Chardonnay", d:"Margaret River 2023", p:"17 – 67"},
+      {n:"Henschke 'Innes Vineyard', Pinot Gris", d:"Adelaide Hills 2025", p:"17 – 66"},
+    ]},
+    { title:"Rosé", style:"list", head:"Glass – Bottle", items:[
+      {n:"Conde Valdemar, Garnacha & Mazuelo", d:"Rioja, Spain 2024", p:"15 – 59"},
+      {n:"Cape Mentelle 'Sixteen Hectares', Grenache", d:"Margaret River 2026", p:"17 – 66"},
+    ]},
+    { title:"Red", style:"list", head:"Glass – Bottle", items:[
+      {n:"Kelvedon Estate, Pinot Noir", d:"East Coast Tasmania 2024", p:"17 – 70"},
+      {n:"Kelvedon Estate 'Block 5', Pinot Noir", d:"East Coast Tasmania 2020", p:"90"},
+      {n:"Nanny Goat, Pinot Noir", d:"Central Otago, NZ 2024", p:"17 – 66"},
+      {n:"Sangre de Toro, Garnacha", d:"Catalunya, Spain 2023", p:"15 – 55"},
+      {n:"Coronas, Torres, Tempranillo", d:"Catalunya, Spain 2022", p:"16 – 58"},
+      {n:"Celeste Crianza, Tempranillo", d:"Ribera del Duero, Spain 2022", p:"17 – 65"},
+      {n:"Conde Valdemar Reserva, Tempranillo & Garnacha", d:"Rioja 2015", p:"17 – 65"},
+      {n:"Best's, Sparkling Shiraz", d:"Served chilled · Great Western, VIC 2021", p:"17 – 60"},
+      {n:"Cape Mentelle 'Trinders', Cabernet Merlot", d:"Margaret River 2022", p:"16 – 62"},
+      {n:"Yalumba 'Paradox', Shiraz", d:"Barossa Valley 2024", p:"18 – 74"},
+      {n:"Trediberri, Barbera d'Alba", d:"Chilled optional · Piedmont, Italy 2025", p:"16 – 61"},
+      {n:"Ricasoli, Chianti Classico, Brolio", d:"Tuscany 2023", p:"20 – 85"},
+      {n:"Terrazas de los Andes, Malbec", d:"Mendoza, Argentina 2023", p:"17 – 64"},
+    ]},
+  ]},
+  { id:"bar", label:"Beer & Spirits", intro:{img:"img/beer-1.jpg", cap:"Estrella on tap", text:"Ice-cold Spanish beer on tap, plus a well-stocked back bar of gin, tequila, whisky and Spanish liqueurs."}, groups:[
+    { title:"Aperitif", style:"list", items:[
+      {n:"Spanish Cava", d:"Sparkling", p:"16"},
+      {n:"Spritz of choice", d:"Aperol, Campari or Chambord · prosecco & soda", p:"20"},
+      {n:"Red Sangria", d:"Red wine, brandy, orange", p:"24"},
+      {n:"Pisco Sour", d:"Pisco, lime, bitters", p:"24"},
+    ]},
+    { title:"Beer", style:"list", items:[
+      {n:"Estrella", d:"Spanish lager on tap", p:"12"},
+      {n:"Rosa Blanca", d:"Hoppy lager on tap", p:"12"},
+      {n:"Peroni Nastro Azzurro 3.5%", p:"10"},
+      {n:"Nort Non-Alcoholic 0%", p:"11"},
+    ]},
+    { title:"Gin, tequila & pisco", style:"list", items:[
+      {n:"Hendrick's Gin", p:"16"},{n:"Dry Ink Gin", p:"16"},{n:"Sloe & Berry Ink Gin", p:"16"},
+      {n:"Tanqueray Gin", p:"15"},{n:"Bombay Sapphire Gin", p:"15"},
+      {n:"Espolón Tequila Blanco", p:"16"},{n:"Don Julio Tequila Blanco", p:"17"},
+      {n:"Malpaso Pisco Independiente 40°", p:"16"},
+    ]},
+    { title:"Vodka, rum & whisky", style:"list", items:[
+      {n:"Vodka O", p:"15"},{n:"Grey Goose Vodka", p:"18"},
+      {n:"Mount Gay Rum", p:"15"},{n:"Sailor Jerry Spiced Rum", p:"15"},{n:"The Kraken Black Spiced Rum", p:"15"},
+      {n:"Maker's Mark Bourbon", p:"15"},{n:"Jameson Irish Whiskey", p:"15"},
+      {n:"Glenmorangie 12yo Single Malt", p:"17"},{n:"The Macallan 12yo Single Malt", p:"19"},
+    ]},
+    { title:"Liqueurs", style:"list", items:[
+      {n:"Frangelico", p:"14"},{n:"Disaronno Amaretto", p:"14"},{n:"Baileys Original Irish Cream", p:"14"},
+      {n:"Kahlúa", p:"14"},{n:"Licor 43", p:"14"},
+    ]},
+  ]},
+];
+
+/* ---------- WEDNESDAY TAPAS (update fortnightly) ---------- */
+const WED = {
+  dates: "21 & 28 Oct, 4 Nov",
+  dishes: [
+    {n:"Whipped eggplant & flatbread", d:"Red capsicum, olive, lemon oil, sumac.", p:"Included", photos:["img/wed-eggplant.jpg"]},
+    {n:"Heirloom tomatoes", d:"White anchovies, chilli oil, smoked salt, chervil.", p:"Included", photos:["img/wed-tomato.jpg"]},
+    {n:"SB5 striploin (300g)", d:"Prawn smoked butter sauce, paprika oil, spring onion.", p:"Included", photos:["img/wed-striploin.jpg"]},
+    {n:"Grilled red & white cabbage", d:"Lime sauce, chive.", p:"Included", photos:["img/wed-cabbage.jpg"]},
+  ]
+};
+
+/* ---------- RENDER ---------- */
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmtP = p => /^[0-9]/.test(p) ? "$" + p.replace(/ \/ | – /g, m => m + "$") : p;
+
+function carousel(item){
+  const photos = item.photos && item.photos.length ? item.photos : [null, null, null];
+  const slides = photos.map((src, i) => `<div class="slide">${
+    src ? `<img src="${esc(src)}" alt="${esc(item.n)}${photos.length>1?' – photo '+(i+1):''}" loading="lazy">`
+        : `<div class="ph"><span class="ini">${esc((item.es||item.n).charAt(0))}</span><span class="lbl">Photo ${i+1}</span></div>`
+  }</div>`).join("");
+  const multi = photos.length > 1;
+  return `<div class="carousel">
+    <div class="slides">${slides}</div>
+    ${multi ? `<button class="arrow l" aria-label="Previous photo">‹</button><button class="arrow r" aria-label="Next photo">›</button>
+    <div class="dots">${photos.map((_,i)=>`<button class="dot${i?'':' on'}" aria-label="Photo ${i+1}"></button>`).join("")}</div>` : ""}
+  </div>`;
+}
+
+function card(it){
+  return `<article class="card">${carousel(it)}
+    <div class="body">
+      ${it.tag ? `<span class="tag">${esc(it.tag)}</span>` : ""}
+      <div class="row"><h4 class="name">${esc(it.es || it.n)}</h4><span class="price">${esc(fmtP(it.p))}</span></div>
+      ${it.es ? `<p class="es">${esc(it.n)}</p>` : ""}
+      ${it.d ? `<p class="desc">${esc(it.d)}</p>` : ""}
+      ${it.diet ? `<div class="diets">${it.diet.map(x=>`<span class="diet">${esc(x)}</span>`).join("")}</div>` : ""}
+    </div></article>`;
+}
+
+function listGroup(g){
+  return `${g.photo ? `<figure class="list-photo"><img src="${g.photo[0]}" alt="${esc(g.photo[1])}" loading="lazy"><figcaption>${esc(g.photo[1])}</figcaption></figure>` : ""}<div class="list">${g.head ? `<div class="list-head">${esc(g.head)}</div>` : ""}${
+    g.items.map(it => `<div class="li"><div class="n">${esc(it.n)}${it.d?`<span>${esc(it.d)}</span>`:""}</div><div class="p">${esc(fmtP(it.p))}</div></div>`).join("")
+  }</div>`;
+}
+
+document.getElementById("wedDates").textContent = WED.dates;
+document.getElementById("wedGrid").innerHTML = WED.dishes.map(card).join("");
+
+const tabsEl = document.getElementById("tabs"), panelsEl = document.getElementById("panels");
+MENU.forEach((sec, i) => {
+  const b = document.createElement("button");
+  b.className = "tab"; b.role = "tab"; b.textContent = sec.label;
+  b.setAttribute("aria-selected", i === 0);
+  b.onclick = () => select(sec.id);
+  b.dataset.id = sec.id; tabsEl.appendChild(b);
+
+  const p = document.createElement("div");
+  p.className = "panel" + (i === 0 ? " active" : ""); p.id = "panel-" + sec.id;
+  const lists = sec.groups.filter(g => g.style === "list");
+  const cards = sec.groups.filter(g => g.style !== "list");
+  let html = sec.strip ? `<div class="strip-photos">${sec.strip.map(([src,cap])=>`<figure><img src="${src}" alt="${esc(cap)}" loading="lazy"><figcaption>${esc(cap)}</figcaption></figure>`).join("")}</div>` : "";
+  if (sec.intro) html += `<div class="wine-intro"><figure><img src="${sec.intro.img}" alt="${esc(sec.intro.cap)}" loading="lazy"><figcaption>${esc(sec.intro.cap)}</figcaption></figure><p>${esc(sec.intro.text)}</p></div>`;
+  html += cards.map(g => `<div class="group">
+      <h3>${esc(g.title)}${g.sub ? `<small>${esc(g.sub)}</small>` : ""}</h3><div class="rule"></div>
+      ${g.note ? `<p class="note">${esc(g.note)}</p>` : ""}
+      <div class="grid">${g.items.map(card).join("")}</div></div>`).join("");
+  if (lists.length){
+    html += `<div class="two">${lists.map(g => `<div class="group">
+      <h3>${esc(g.title)}</h3><div class="rule"></div>${listGroup(g)}</div>`).join("")}</div>`;
+  }
+  p.innerHTML = html; panelsEl.appendChild(p);
+});
+
+function select(id){
+  document.querySelectorAll(".tab").forEach(t => t.setAttribute("aria-selected", t.dataset.id === id));
+  document.querySelectorAll(".panel").forEach(p => p.classList.toggle("active", p.id === "panel-" + id));
+  const top = document.getElementById("menu").getBoundingClientRect().top + window.scrollY - 60;
+  if (window.scrollY > top) window.scrollTo({top, behavior:"smooth"});
+}
+
+/* Carousel behaviour */
+document.querySelectorAll(".carousel").forEach(c => {
+  const track = c.querySelector(".slides"), dots = [...c.querySelectorAll(".dot")];
+  if (!dots.length) return;
+  const go = i => track.scrollTo({left: i * track.clientWidth, behavior:"smooth"});
+  const cur = () => Math.round(track.scrollLeft / track.clientWidth);
+  dots.forEach((d, i) => d.onclick = () => go(i));
+  c.querySelector(".arrow.l").onclick = () => go(Math.max(0, cur() - 1));
+  c.querySelector(".arrow.r").onclick = () => go(Math.min(dots.length - 1, cur() + 1));
+  track.addEventListener("scroll", () => { const i = cur(); dots.forEach((d, j) => d.classList.toggle("on", i === j)); }, {passive:true});
+});
+
+document.getElementById("topicSel").addEventListener("change", e => {
+  document.getElementById("bookingFields").hidden = e.target.value !== "Function or group booking";
+});
+/* Preview-only form handling: on the live site (Netlify) these post for real */
+const live = !location.hostname.includes("claude") && location.protocol.startsWith("http");
+document.getElementById("fnForm").addEventListener("submit", e => { if(!live){ e.preventDefault(); document.getElementById("fnNote").hidden=false; }});
+
+</script>
+</body>
+</html>
