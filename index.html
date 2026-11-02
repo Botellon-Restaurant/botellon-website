@@ -258,6 +258,15 @@
   .enq-title{text-transform:uppercase;letter-spacing:.04em}
   .f2[hidden]{display:none}
   section[hidden]{display:none}
+  .map-wrap{margin-top:22px;border-radius:16px;overflow:hidden;border:1px solid rgba(255,255,255,.14);height:340px}
+  .map-wrap iframe{width:100%;height:100%;border:0;display:block}
+  .slideup{position:fixed;right:20px;bottom:20px;z-index:40;width:300px;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 18px 40px -18px rgba(0,0,0,.35);transform:translateY(20px);opacity:0;transition:transform .3s,opacity .3s}
+  .slideup.in{transform:none;opacity:1}
+  .slideup[hidden]{display:none}
+  .su-x{position:absolute;top:8px;right:12px;border:0;background:none;font-size:24px;line-height:1;color:var(--muted);cursor:pointer}
+  .su-t{font-family:var(--serif);font-size:22px;text-transform:uppercase;letter-spacing:.04em;color:var(--green)}
+  .su-s{font-size:14px;color:var(--muted);margin:6px 0 14px}
+  @media (max-width:760px){ .slideup{left:14px;right:14px;width:auto;bottom:84px} }
 </style>
 </head>
 <body>
@@ -314,6 +323,7 @@
   <div class="sec-head">
     <h2>The Menu</h2>
     <p>Made to share. Our menu changes every fortnight, so some dishes may differ on the night.</p>
+    <p style="margin-top:14px"><a class="btn ghost" href="botellon-menu.pdf" target="_blank" rel="noopener">Download printable menu (PDF)</a></p>
   </div>
 
   <div class="tabs" role="tablist" id="tabs"></div>
@@ -528,6 +538,7 @@
         <a class="btn" data-book href="#" target="_blank" rel="noopener">Book a table</a>
       </div>
     </div>
+    <div class="map-wrap"><iframe title="Map to Botellon" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Botellon+Spanish+Tapas+%26+Wine+Bar,+327+Honour+Ave,+Graceville+QLD+4075&output=embed"></iframe></div>
   </section>
 </div>
 
@@ -564,6 +575,13 @@
   </div>
   <div style="text-align:center;font-size:12px;opacity:.6;padding:0 20px 24px">© 2026 Botellon · Graceville, Brisbane</div>
 </footer>
+
+<aside class="slideup" id="slideup" aria-label="Join our mailing list" hidden>
+  <button class="su-x" id="suClose" aria-label="Close">×</button>
+  <p class="su-t">Stay in the loop</p>
+  <p class="su-s">New menus, wine nights and the odd invite. No spam.</p>
+  <a class="btn" id="suJoin" href="https://eepurl.com/g88l2T" target="_blank" rel="noopener">Join the mailing list</a>
+</aside>
 
 <div class="mbar">
   <a class="btn ghost" href="#menu">Menu</a>
@@ -846,6 +864,19 @@ document.getElementById("topicSel").addEventListener("change", e => {
 const live = !location.hostname.includes("claude") && location.protocol.startsWith("http");
 document.getElementById("fnForm").addEventListener("submit", e => { if(!live){ e.preventDefault(); document.getElementById("fnNote").hidden=false; }});
 
+
+/* Slide-up mailing list: shows once, after some scrolling or 25s */
+(function(){
+  const box=document.getElementById("slideup"); let seen=false;
+  try{ seen = localStorage.getItem("botellon_su")==="1"; }catch(e){}
+  if(seen) return;
+  const show=()=>{ if(!box.hidden) return; box.hidden=false; requestAnimationFrame(()=>box.classList.add("in")); };
+  const done=()=>{ box.classList.remove("in"); setTimeout(()=>box.hidden=true,300); try{localStorage.setItem("botellon_su","1");}catch(e){} };
+  const t=setTimeout(show,25000);
+  window.addEventListener("scroll",function f(){ if(scrollY>document.body.scrollHeight*0.35){ show(); clearTimeout(t); removeEventListener("scroll",f);} },{passive:true});
+  document.getElementById("suClose").onclick=done;
+  document.getElementById("suJoin").addEventListener("click",done);
+})();
 </script>
 </body>
 </html>
