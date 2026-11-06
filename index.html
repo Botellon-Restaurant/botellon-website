@@ -334,7 +334,7 @@
   </div>
 
   <div class="tabs" role="tablist" id="tabs"></div>
-  <p class="dietkey">GF gluten free · V vegetarian · VG vegan · DF dairy free <i>(dietary tags coming soon)</i></p>
+  <p class="dietkey">GF gluten free · DF dairy free · NF nut free · V vegetarian · VE vegan · <b>O</b> = option available on request (e.g. GFO)</p>
   <div id="panels"></div>
 </section>
 
@@ -610,49 +610,49 @@ document.querySelectorAll('#bookTop,#bookHero,#bookFoot,[data-book]').forEach(a 
 const MENU = [
   { id:"food", label:"Food", groups:[
     { title:"Frío", sub:"Cold · made in house", style:"cards", items:[
-      {es:"Ostras", n:"Freshly shucked oysters (TAS)", d:"Cucumber mignonette. Half or full dozen.", p:"33 / 65", photos:["img/oyster-1.jpg","img/oyster-2.jpg"]},
-      {es:"Pan de masa madre", n:"Sourdough", d:"Whipped garlic & chive butter.", p:"7 p.p."},
-      {es:"Aceitunas aliñadas", n:"Marinated olives", d:"", p:"11", photos:["img/olives-1.jpg"]},
-      {es:"Paté de pato", n:"Duck liver pâté", d:"Fig, walnut, charred bread.", p:"26", photos:["img/pate-1.jpg"]},
-      {es:"Tomates con anchoas", n:"Heirloom tomatoes", d:"Olasagasti anchovies, chilli oil.", p:"27", photos:["img/tomato-1.jpg","img/tomato-2.jpg","img/tomato-3.jpg"]},
-      {n:"Stracciatella", d:"Poached pear, aged balsamic, mint, flatbread.", p:"24", photos:["img/stracc-1.jpg","img/stracc-2.jpg","img/stracc-3.jpg"]},
-      {n:"Babaganoush", d:"Peppers, olive, sumac, aleppo oil, flatbread.", p:"24", photos:["img/baba-1.jpg","img/baba-2.jpg"]},
+      {es:"Ostras", n:"Freshly shucked oysters (TAS)", d:"Cucumber mignonette. Half or full dozen.", p:"33 / 65", diet:["GF","DF","NF"], photos:["img/oyster-1.jpg","img/oyster-2.jpg"]},
+      {es:"Pan de masa madre", n:"Sourdough", d:"Whipped garlic & chive butter.", p:"7 p.p.", diet:["DFO","NF","V","VEO"]},
+      {es:"Aceitunas aliñadas", n:"Marinated olives", d:"", p:"11", diet:["GF","DF","NF","V","VE"], photos:["img/olives-1.jpg"]},
+      {es:"Paté de pato", n:"Duck liver pâté", d:"Fig, walnut, charred bread.", p:"26", diet:["GFO"], photos:["img/pate-1.jpg"]},
+      {es:"Tomates con anchoas", n:"Heirloom tomatoes", d:"Olasagasti anchovies, chilli oil.", p:"27", diet:["GF","DF","NF"], photos:["img/tomato-1.jpg","img/tomato-2.jpg","img/tomato-3.jpg"]},
+      {n:"Stracciatella", d:"Poached pear, aged balsamic, mint, flatbread.", p:"24", diet:["GFO","NF","V"], photos:["img/stracc-1.jpg","img/stracc-2.jpg","img/stracc-3.jpg"]},
+      {n:"Babaganoush", d:"Peppers, olive, sumac, aleppo oil, flatbread.", p:"24", diet:["GFO","DF","NFO","V","VE"], photos:["img/baba-1.jpg","img/baba-2.jpg"]},
     ]},
     { title:"Bocados", sub:"Small bites", style:"cards", items:[
-      {es:"Croquetas de jamón", n:"Crispy jamón croquettes", d:"Manchego, chipotle mayo. 2 pieces.", p:"18", photos:["img/croq-1.jpg","img/croq-2.jpg"]},
-      {es:"Tosta de anchoas", n:"Anchovy toast", d:"Whipped roe, chives. 2 pieces.", p:"18"},
-      {es:"Vieiras a la plancha", n:"Grilled scallop (WA)", d:"Sobrasada butter. 3 pieces.", p:"29", photos:["img/scallop-2.jpg","img/scallop-3.jpg"]},
+      {es:"Croquetas de jamón", n:"Crispy jamón croquettes", d:"Manchego, chipotle mayo. 2 pieces.", p:"18", diet:["NF"], photos:["img/croq-1.jpg","img/croq-2.jpg"]},
+      {es:"Tosta de anchoas", n:"Anchovy toast", d:"Whipped roe, chives. 2 pieces.", p:"18", diet:["GFO","DF","NF"]},
+      {es:"Vieiras a la plancha", n:"Grilled scallop (WA)", d:"Sobrasada butter. 3 pieces.", p:"29", diet:["GF","DFO","NF"], photos:["img/scallop-2.jpg","img/scallop-3.jpg"]},
     ]},
     { title:"Embutidos y quesos", sub:"Meats & cheeses · sliced to order", note:"Choose 2 for $31 · Choose 3 for $37", style:"cards", items:[
-      {es:"Manchego curado", n:"12 month manchego", d:"", p:"24"},
-      {n:"Triple cream brie", d:"", p:"20"},
-      {es:"Jamón serrano", n:"Serrano ham", d:"", p:"22", photos:["img/serrano-1.jpg"]},
-      {n:"Salame", d:"", p:"22"},
+      {es:"Manchego curado", n:"12 month manchego", d:"", p:"24", diet:["GF","NF"]},
+      {n:"Triple cream brie", d:"", p:"20", diet:["GF","NF"]},
+      {es:"Jamón serrano", n:"Serrano ham", d:"", p:"22", diet:["GF","DF","NF"], photos:["img/serrano-1.jpg"]},
+      {n:"Salame", d:"", p:"22", diet:["GF","DF","NF"]},
     ]},
     { title:"Tapas de la casa", sub:"Our classics · made to order", style:"cards", items:[
-      {es:"Chipirones fritos", n:"Baby calamari", d:"Lightly battered, aioli.", p:"22", photos:["img/calamari-1.jpg"]},
-      {n:"Patatas bravas", d:"Aioli.", p:"18", tag:"Classic", photos:["img/bravas-1.jpg"]},
-      {es:"Gambas al ajillo", n:"Garlic prawns (WA)", d:"Chilli, olive oil, lemon.", p:"31"},
-      {es:"Berenjenas fritas", n:"Eggplant chips", d:"Queso ibérico, truffle honey.", p:"21"},
-      {es:"Col a la brasa", n:"Charred cabbage", d:"Almond purée, caper butter, migas.", p:"25"},
-      {n:"Chorizo", d:"Smoked yoghurt, paprika oil, chive.", p:"22", photos:["img/chorizo-1.jpg","img/chorizo-2.jpg","img/chorizo-3.jpg"]},
-      {n:"Baked saganaki cheese", d:"Salsa agridulce, oregano.", p:"33", photos:["img/saganaki-1.jpg"]},
+      {es:"Chipirones fritos", n:"Baby calamari", d:"Lightly battered, aioli.", p:"22", diet:["GF","DF","NF"], photos:["img/calamari-1.jpg"]},
+      {n:"Patatas bravas", d:"Aioli.", p:"18", diet:["GF","DF","NF","V","VEO"], tag:"Classic", photos:["img/bravas-1.jpg"]},
+      {es:"Gambas al ajillo", n:"Garlic prawns (WA)", d:"Chilli, olive oil, lemon.", p:"31", diet:["GF","DF","NF"]},
+      {es:"Berenjenas fritas", n:"Eggplant chips", d:"Queso ibérico, truffle honey.", p:"21", diet:["GF","DFO","NF","V","VEO"]},
+      {es:"Col a la brasa", n:"Charred cabbage", d:"Almond purée, caper butter, migas.", p:"25", diet:["GFO","NF","V"]},
+      {n:"Chorizo", d:"Smoked yoghurt, paprika oil, chive.", p:"22", diet:["GF","NF"], photos:["img/chorizo-1.jpg","img/chorizo-2.jpg","img/chorizo-3.jpg"]},
+      {n:"Baked saganaki cheese", d:"Salsa agridulce, oregano.", p:"33", diet:["GF","NF","V"], photos:["img/saganaki-1.jpg"]},
     ]},
     { title:"Paella", sub:"Housemade stock & sofrito", note:"Please allow 30–45 minutes", style:"cards", items:[
-      {n:"Chorizo y Pollo", d:"Chorizo, chicken, chimichurri.", p:"65"},
-      {n:"Mariscos (WA)", d:"Prawn, scallop, octopus, chorizo, chipotle aioli.", p:"78", photos:["img/mariscos-1.jpg"]},
-      {n:"Verde", d:"Mushroom, artichoke, zucchini.", p:"56", tag:"Vegetarian"},
+      {n:"Chorizo y Pollo", d:"Chorizo, chicken, chimichurri.", p:"65", diet:["GF","DF","NF"]},
+      {n:"Mariscos (WA)", d:"Prawn, scallop, octopus, chorizo, chipotle aioli.", p:"78", diet:["GF","DF","NF"], photos:["img/mariscos-1.jpg"]},
+      {n:"Verde", d:"Mushroom, artichoke, zucchini.", p:"56", diet:["GF","DF","NF","V","VE"], tag:"Vegetarian"},
     ]},
     { title:"A la brasa", sub:"From the grill · over open flame", style:"cards", items:[
-      {es:"Pulpo a la brasa", n:"Octopus (WA)", d:"Potato, pimentón, whipped bottarga.", p:"38", photos:["img/octopus-1.jpg"]},
-      {es:"Picantón asado", n:"Spatchcock", d:"Mojo rojo, lemon oil, sage.", p:"50", photos:["img/spatchcock-1.jpg","img/spatchcock-2.jpg"]},
-      {es:"Costillas estofadas", n:"Braised short ribs", d:"Beef jus, paprika oil, spring onion.", p:"48", photos:["img/shortrib-2.jpg","img/shortrib-1.jpg"]},
-      {es:"Lomo bajo", n:"300g Black Onyx SB5 striploin", d:"Tomato salsa. Add chimichurri +5.", p:"65", photos:["img/steak-1.jpg","img/steak-2.jpg","img/steak-3.jpg"]},
+      {es:"Pulpo a la brasa", n:"Octopus (WA)", d:"Potato, pimentón, whipped bottarga.", p:"38", diet:["GFO","DF","NF"], photos:["img/octopus-1.jpg"]},
+      {es:"Picantón asado", n:"Spatchcock", d:"Mojo rojo, lemon oil, sage.", p:"50", diet:["GF","NF"], photos:["img/spatchcock-1.jpg","img/spatchcock-2.jpg"]},
+      {es:"Costillas estofadas", n:"Braised short ribs", d:"Beef jus, paprika oil, spring onion.", p:"48", diet:["GF","NF"], photos:["img/shortrib-2.jpg","img/shortrib-1.jpg"]},
+      {es:"Lomo bajo", n:"300g Black Onyx SB5 striploin", d:"Tomato salsa. Add chimichurri +5.", p:"65", diet:["GF","DF","NF"], photos:["img/steak-1.jpg","img/steak-2.jpg","img/steak-3.jpg"]},
     ]},
     { title:"Guarniciones", sub:"Sides", style:"cards", items:[
-      {es:"Ensalada mixta", n:"Mixed radicchio & cos salad", d:"Lime dressing, manchego.", p:"20"},
-      {n:"Patatas bravas", d:"Aioli.", p:"18", photos:["img/bravas-1.jpg"]},
-      {es:"Col a la brasa", n:"Charred cabbage", d:"Almond purée, caper butter, migas.", p:"25"},
+      {es:"Ensalada mixta", n:"Mixed radicchio & cos salad", d:"Lime dressing, manchego.", p:"20", diet:["GF","DFO","NF","V","VEO"]},
+      {n:"Patatas bravas", d:"Aioli.", p:"18", diet:["GF","DF","NF","V","VEO"], photos:["img/bravas-1.jpg"]},
+      {es:"Col a la brasa", n:"Charred cabbage", d:"Almond purée, caper butter, migas.", p:"25", diet:["GFO","NF","V"]},
     ]},
   ]},
   { id:"dessert", label:"Dessert", groups:[
