@@ -429,8 +429,12 @@
       <h3 class="enq-title">Contact us</h3>
       <p class="enq-sub">Questions, function enquiries, feedback or just saying hola. Send us a message and we'll get back to you. For groups of 10 or more, please get in touch here rather than booking online.</p>
     </div>
-    <form id="fnForm" name="contact" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="contact">
+    <form id="fnForm" name="contact" method="POST" action="https://formsubmit.co/bookings@botellonbar.com">
+      <input type="hidden" name="_subject" id="fnSubject" value="New website enquiry">
+      <input type="hidden" name="_next" value="https://botellonbar.com/?sent=1#contact">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
       <div class="f2">
         <label>Name<input name="name" required></label>
         <label>Phone (optional)<input name="phone" type="tel"></label>
@@ -443,7 +447,7 @@
       </div>
       <label>Message<textarea name="message" rows="4" required></textarea></label>
       <button class="btn" type="submit">Send message</button>
-      <p class="formnote" id="fnNote" hidden>Thanks! This form will send for real once the site is live.</p>
+      <p class="formnote" id="fnNote" hidden>Gracias! Your message has been sent. We'll be in touch soon.</p>
     </form>
   </div>
 </section>
@@ -873,7 +877,14 @@ document.getElementById("topicSel").addEventListener("change", e => {
 });
 /* Preview-only form handling: on the live site (Netlify) these post for real */
 const live = !location.hostname.includes("claude") && location.protocol.startsWith("http");
-document.getElementById("fnForm").addEventListener("submit", e => { if(!live){ e.preventDefault(); document.getElementById("fnNote").hidden=false; }});
+document.getElementById("fnForm").addEventListener("submit", e => {
+  const f=e.target, topic=document.getElementById("topicSel").value;
+  const to = topic==="Feedback" ? "manager@botellonbar.com" : "bookings@botellonbar.com";
+  f.action="https://formsubmit.co/"+to;
+  document.getElementById("fnSubject").value="Website: "+topic;
+  if(!live){ e.preventDefault(); document.getElementById("fnNote").hidden=false; }
+});
+if (new URLSearchParams(location.search).get("sent")) { const n=document.getElementById("fnNote"); n.hidden=false; }
 
 
 /* Slide-up mailing list: shows once, after some scrolling or 25s */

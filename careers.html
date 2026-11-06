@@ -50,9 +50,12 @@
     <a class="back" href="/">Back to Botellon</a>
   </div>
 
-  <form id="careersForm" name="careers" method="POST" action="/careers.html?sent=1" data-netlify="true" netlify-honeypot="company" enctype="multipart/form-data">
-    <input type="hidden" name="form-name" value="careers">
-    <p class="hp"><label>Leave this empty<input name="company"></label></p>
+  <form id="careersForm" name="careers" method="POST" action="https://formsubmit.co/manager@botellonbar.com" enctype="multipart/form-data">
+    <input type="hidden" name="_subject" value="New job application — Botellon website">
+    <input type="hidden" name="_next" value="https://botellonbar.com/careers.html?sent=1">
+    <input type="hidden" name="_template" value="table">
+    <input type="hidden" name="_captcha" value="false">
+    <p class="hp"><label>Leave this empty<input name="_honey" tabindex="-1" autocomplete="off"></label></p>
     <div class="f2">
       <label>Full name<input name="name" required></label>
       <label>Phone<input name="phone" type="tel" required></label>
