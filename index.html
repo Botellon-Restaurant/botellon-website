@@ -282,6 +282,8 @@
   .board-pics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
   .board-pics img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:12px}
   .board figcaption{padding:8px 2px 0;font-size:13px;color:var(--muted)}
+  .soldout{display:inline-block;background:var(--brand-cream);color:var(--green);font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:999px;margin-bottom:14px}
+  .soldline{font-size:14px;color:var(--green);font-weight:500;margin:-12px 0 20px}
 </style>
 </head>
 <body>
@@ -351,6 +353,7 @@
   </div>
   <div class="features">
     <div class="feature">
+      <div class="soldout">🎉 Sold out Wed 11 Nov · book early!</div>
       <div class="eyebrow" style="opacity:.75">Every Wednesday</div>
       <h4>Wednesday Tapas Night</h4>
       <div class="big">$53 <span style="font-size:20px">p.p.</span></div>
@@ -365,7 +368,7 @@
       <h4>Happy Hour</h4>
       <div class="sub" style="margin-top:10px">One drink + one pintxo. One drink per person at a time.</div>
       <ul>
-        <li><b>Cocktail $23</b> · Aperol Spritz, London Lemonade, Margarita, Red Sangria, French Martini</li>
+        <li><b>Cocktail $23</b> · Aperol Spritz, London Lemonade, Margarita, Red Sangría, French Martini</li>
         <li><b>Mocktail $21</b> · Mint Lemonade</li>
         <li><b>Wine $19</b> · House sparkling, white, rosé or red</li>
         <li><b>Beer $13</b> · Estrella pint</li>
@@ -379,6 +382,7 @@
   <div class="group">
     <h3>Wednesday Tapas Menu<small id="wedDates"></small></h3><div class="rule"></div>
     <p class="note">4 dishes + a glass of house wine or beer · $53 p.p. · changes every fortnight</p>
+    <p class="soldline">Our last Wednesday sold out, so book ahead to grab a seat.</p>
     <div class="grid" id="wedGrid"></div>
   </div>
 </section>
@@ -625,7 +629,7 @@ const MENU = [
       {n:"Babaganoush", d:"Peppers, olive, sumac, aleppo oil, flatbread.", p:"24", diet:["GFO","DF","NFO","V","VE"], photos:["img/baba-1.jpg","img/baba-2.jpg"]},
     ]},
     { title:"Bocados", sub:"Small bites", style:"cards", items:[
-      {es:"Croquetas de jamón", n:"Crispy jamón croquettes", d:"Manchego, chipotle mayo. 2 pieces.", p:"18", diet:["NF"], photos:["img/croq-2.jpg","img/croq-1.jpg"]},
+      {es:"Croquetas de jamón y manchego", n:"Jamón & manchego croquettes", d:"2 pieces.", p:"18", diet:["NF"], photos:["img/croq-2.jpg","img/croq-1.jpg"]},
       {es:"Tosta de anchoas", n:"Anchovy toast", d:"Whipped roe, chives. 2 pieces.", p:"18", diet:["GFO","DF","NF"], photos:["img/anchovy-1.jpg","img/anchovy-2.jpg","img/anchovy-3.jpg"]},
       {es:"Vieiras a la plancha", n:"Grilled scallop (WA)", d:"Sobrasada butter. 3 pieces.", p:"29", diet:["GF","DFO","NF"], photos:["img/scallop-1.jpg","img/scallop-2.jpg","img/scallop-3.jpg"]},
     ]},
@@ -642,6 +646,7 @@ const MENU = [
       {es:"Berenjenas fritas", n:"Eggplant chips", d:"Queso ibérico, truffle honey.", p:"21", diet:["GF","DFO","NF","V","VEO"]},
       {es:"Col a la brasa", n:"Charred cabbage", d:"Almond purée, caper butter, migas.", p:"25", diet:["GFO","NF","V"]},
       {n:"Chorizo", d:"Smoked yoghurt, paprika oil, chive.", p:"22", diet:["GF","NF"], photos:["img/chorizo-1.jpg","img/chorizo-2.jpg","img/chorizo-3.jpg"]},
+      {es:"Pulpo", n:"Octopus (WA)", d:"Chickpea, chimichurri, tomato.", p:"38"},
       {n:"Baked saganaki cheese", d:"Salsa agridulce, oregano.", p:"33", diet:["GF","NF","V"], photos:["img/saganaki-1.jpg"]},
     ]},
     { title:"Paella", sub:"Housemade stock & sofrito", note:"Please allow 30–45 minutes", style:"cards", items:[
@@ -650,7 +655,7 @@ const MENU = [
       {n:"Verde", d:"Mushroom, artichoke, zucchini.", p:"56", diet:["GF","DF","NF","V","VE"], tag:"Vegetarian"},
     ]},
     { title:"A la brasa", sub:"From the grill · over open flame", style:"cards", items:[
-      {es:"Pulpo a la brasa", n:"Octopus (WA)", d:"Potato, pimentón, whipped bottarga.", p:"38", diet:["GFO","DF","NF"], photos:["img/octopus-1.jpg"]},
+      {es:"Pescado del día", n:"Market fish", d:"Spanish salsa verde.", p:"56"},
       {es:"Picantón asado", n:"Spatchcock", d:"Mojo rojo, lemon oil, sage.", p:"50", diet:["GF","NF"], photos:["img/spatchcock-1.jpg","img/spatchcock-2.jpg"]},
       {es:"Costillas estofadas", n:"Braised short ribs", d:"Beef jus, paprika oil, spring onion.", p:"48", diet:["GF","NF"], photos:["img/shortrib-2.jpg","img/shortrib-1.jpg"]},
       {es:"Lomo bajo", n:"300g Black Onyx SB5 striploin", d:"Tomato salsa. Add chimichurri +5.", p:"65", diet:["GF","DF","NF"], photos:["img/steak-1.jpg","img/steak-2.jpg","img/steak-3.jpg"]},
@@ -680,13 +685,13 @@ const MENU = [
   ]},
   { id:"cocktails", label:"Cocktails", strip:[["img/drink-margarita.jpg","Margarita"],["img/drink-spritz.jpg","Aperol Spritz"],["img/drink-lemonade.jpg","London Lemonade"],["img/drink-martini.jpg","Dirty Martini"]], groups:[
     { title:"Cocktails", sub:"Classics available on request", style:"list", items:[
-      {n:"Red Sangria", d:"Red wine, brandy, orange.", p:"24"},
-      {n:"White Sangria", d:"White wine, brandy, apple, ginger.", p:"24"},
+      {n:"Red Sangría", d:"Red wine, brandy, orange.", p:"24"},
+      {n:"White Sangría", d:"White wine, brandy, apple, ginger.", p:"24"},
       {n:"Passionfruit Martini", d:"Vodka, passionfruit, elderflower, pineapple.", p:"24"},
+      {n:"Atardecer", d:"Tequila, mango, cherry, pomegranate.", p:"24"},
+      {n:"Basil Smash", d:"Basil-infused gin, lemon, cucumber.", p:"24"},
       {n:"La Pearfecta", d:"Pear-infused vodka, elderflower, lychee, lemon.", p:"24"},
       {n:"London Lemonade", d:"Gin, elderflower, lemon, soda.", p:"24"},
-      {n:"Espresso Rumtini", d:"Espresso, Kraken coffee rum, Kahlúa, Licor 43.", p:"24"},
-      {n:"Pink Peppercorn Gimlet", d:"Gin, pink peppercorn, lime, agave.", p:"24"},
       {n:"French Martini", d:"Pineapple, vodka, Chambord.", p:"24"},
       {n:"Margarita", d:"Tequila, lime, Cointreau. Chilli optional.", p:"24"},
       {n:"Roja Dora", d:"Gin, Chambord, lime, raspberry, pomegranate.", p:"24"},
@@ -700,6 +705,7 @@ const MENU = [
       {n:"Mint Lemonade", d:"Mint, orange, pineapple, ginger beer.", p:"20"},
       {n:"The Hummingbird", d:"Hibiscus, lychee, agave, orange, lemon, soda.", p:"20"},
       {n:"By The Shore", d:"Watermelon, lychee, cucumber.", p:"20"},
+      {n:"Tarde de Sol", d:"Mango, cherry, pomegranate.", p:"20"},
     ]},
     { title:"Soft drinks", style:"list", items:[
       {n:"Bundaberg Ginger Beer · Sprite · Coke · Coke No Sugar", p:"6"},
@@ -717,7 +723,7 @@ const MENU = [
     ]},
     { title:"White", style:"list", head:"Glass – Bottle", items:[
       {n:"Marc Brédif, Vouvray", d:"Chenin Blanc · Loire Valley, France 2024", p:"17 – 65"},
-      {n:"Poblets Del Montsant", d:"White Grenache & Macabeo · Tarragona, Spain 2022", p:"17 – 66"},
+      {n:"Javier San Pedro Ortega 'Las Levantadas'", d:"Tempranillo Blanco · Rioja 2025", p:"17 – 66"},
       {n:"Abellio, Albariño", d:"Rías Baixas, Spain 2024", p:"18 – 70"},
       {n:"Mandrarossa, Fiano", d:"Sicily 2025", p:"15 – 55"},
       {n:"Shaw + Smith, Sauvignon Blanc", d:"Adelaide Hills 2026", p:"17 – 68"},
@@ -727,7 +733,8 @@ const MENU = [
       {n:"La Pierrelée, Chablis", d:"Burgundy, France 2023", p:"18 – 82"},
       {n:"Kelvedon Estate, Chardonnay", d:"East Coast Tasmania 2024", p:"17 – 70"},
       {n:"Cape Mentelle, Chardonnay", d:"Margaret River 2023", p:"17 – 67"},
-      {n:"Henschke 'Innes Vineyard', Pinot Gris", d:"Adelaide Hills 2025", p:"17 – 66"},
+      {n:"Henschke 'Innes', Pinot Gris", d:"Adelaide Hills 2026", p:"17 – 66"},
+      {n:"Best's, Pinot Grigio", d:"Great Western, VIC 2026", p:"15 – 60"},
     ]},
     { title:"Rosé", style:"list", head:"Glass – Bottle", items:[
       {n:"Conde Valdemar, Garnacha & Mazuelo", d:"Rioja, Spain 2024", p:"15 – 59"},
@@ -739,13 +746,13 @@ const MENU = [
       {n:"Nanny Goat, Pinot Noir", d:"Central Otago, NZ 2024", p:"17 – 66"},
       {n:"Sangre de Toro, Garnacha", d:"Catalunya, Spain 2023", p:"15 – 55"},
       {n:"Coronas, Torres, Tempranillo", d:"Catalunya, Spain 2022", p:"16 – 58"},
-      {n:"Celeste Crianza, Tempranillo", d:"Ribera del Duero, Spain 2022", p:"17 – 65"},
-      {n:"Conde Valdemar Reserva, Tempranillo & Garnacha", d:"Rioja 2015", p:"17 – 65"},
+      {n:"Javier San Pedro Ortega 'Otra Historia', Tempranillo & Viura", d:"Rioja, Spain 2024", p:"17 – 65"},
+      {n:"Eguíluz Reserva, Tempranillo", d:"Rioja, Spain 2021", p:"17 – 65"},
       {n:"Best's, Sparkling Shiraz", d:"Served chilled · Great Western, VIC 2021", p:"17 – 60"},
       {n:"Cape Mentelle 'Trinders', Cabernet Merlot", d:"Margaret River 2022", p:"16 – 62"},
       {n:"Yalumba 'Paradox', Shiraz", d:"Barossa Valley 2024", p:"18 – 74"},
       {n:"Trediberri, Barbera d'Alba", d:"Chilled optional · Piedmont, Italy 2025", p:"16 – 61"},
-      {n:"Ricasoli, Chianti Classico, Brolio", d:"Tuscany 2023", p:"20 – 85"},
+      {n:"Ricasoli, Chianti Classico, Brolio", d:"Tuscany 2024", p:"20 – 85"},
       {n:"Terrazas de los Andes, Malbec", d:"Mendoza, Argentina 2023", p:"17 – 64"},
     ]},
   ]},
@@ -753,8 +760,8 @@ const MENU = [
     { title:"Aperitif", style:"list", items:[
       {n:"Spanish Cava", d:"Sparkling", p:"16"},
       {n:"Spritz of choice", d:"Aperol, Campari or Chambord · prosecco & soda", p:"20"},
-      {n:"Red Sangria", d:"Red wine, brandy, orange", p:"24"},
-      {n:"Pisco Sour", d:"Pisco, lime, bitters", p:"24"},
+      {n:"Red Sangría", d:"Red wine, brandy, orange", p:"24"},
+      {n:"Atardecer", d:"Tequila, mango, cherry, pomegranate", p:"24"},
     ]},
     { title:"Beer", style:"list", items:[
       {n:"Estrella", d:"Spanish lager on tap", p:"12"},
