@@ -620,6 +620,9 @@ document.querySelectorAll('#bookTop,#bookHero,#bookFoot,[data-book]').forEach(a 
    Dietaries: give any dish  diet:["GF","V"]   ·   Spanish name: es:"..." */
 const MENU = [
   { id:"food", label:"Food", groups:[
+    { title:"Special of the week", sub:"Only while it lasts", style:"cards", special:true, items:[
+      {n:"Kingfish tartare", d:"Chilli, chive, lemon juice, fennel, fried capers, leek oil & croutons.", p:"28", tag:"Weekly special"},
+    ]},
     { title:"Frío", sub:"Cold · made in house", style:"cards", items:[
       {es:"Ostras", n:"Freshly shucked oysters (TAS)", d:"Cucumber mignonette. Half or full dozen.", p:"33 / 65", diet:["GF","DF","NF"], photos:["img/oyster-1.jpg","img/oyster-2.jpg"]},
       {es:"Pan de masa madre", n:"Sourdough", d:"Whipped garlic & chive butter.", p:"7 p.p.", diet:["DFO","NF","V","VEO"], photos:["img/sourdough-1.jpg","img/sourdough-2.jpg","img/sourdough-3.jpg"]},
